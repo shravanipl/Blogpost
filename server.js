@@ -12,7 +12,7 @@ const app = express();
 let server;
 app.use(bodyParser.json());
 
-app.get("/post" , (req,res)=>{
+app.get("/posts" , (req,res)=>{
    Post.find()
    .limit(10)
    .then(post=>{
@@ -26,7 +26,7 @@ app.get("/post" , (req,res)=>{
    });
 });
 
-app.get("/post/:id", (req,res) =>{
+app.get("/posts/:id", (req,res) =>{
     Post.findById(req.params.id)
     .then(post=> res.json(post.serialize()))
     .catch(err =>{
@@ -35,7 +35,7 @@ app.get("/post/:id", (req,res) =>{
     });
 });
 
-app.post("/post", (req,res) =>{
+app.post("/posts", (req,res) =>{
     const requiredFields = ["title","author","content"];
     for(let i=0;i<requiredFields.length;i++){
         const field = requiredFields[i];
@@ -56,7 +56,7 @@ app.post("/post", (req,res) =>{
     });
 });
 
-app.put("/post/:id", (req,res) =>{
+app.put("/posts/:id", (req,res) =>{
     if(!(req.params.id === req.body.id)){
         const message = `Request path id (${req.params.id}) and request body id (${req.body.id}) must match`;
         console.error(message);
@@ -68,7 +68,7 @@ app.put("/post/:id", (req,res) =>{
     .catch(err=> res.status(500).json({message:"Internal server error"}));
 });
 
-app.delete("/post/:id", (req,res) =>{
+app.delete("/posts/:id", (req,res) =>{
     Post.findByIdAndDelete(req.params.id)
     .then(post => res.status(204).end())
     .catch(err => res.status(500).json({message:"Internal server error"}));
