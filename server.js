@@ -9,6 +9,7 @@ const {PORT,DATABASE_URL} = require("./config");
 const {Post} = require("./models");
 
 const app = express();
+let server;
 app.use(express.json);
 
 app.get("/posts" , (req,res)=>{
