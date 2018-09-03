@@ -17,7 +17,7 @@ app.get("/post" , (req,res)=>{
    .limit(10)
    .then(posts=>{
        res.json({
-          posts: posts.map(post=>post.serialize())
+          post: posts.map(post=>post.serialize())
        });
    })
    .catch(err =>{
