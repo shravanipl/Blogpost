@@ -1,5 +1,5 @@
 "use strict";
 
-exports.DATABASE_URL = process.env.DATABASE_URL || "mongodb://localhost/posts";
-exports.TEST_DATABASE_URL = process.env.DATABASE_URL || "mongodb://localhost/test-posts";
+exports.DATABASE_URL = process.env.DATABASE_URL || "mongodb://localhost/post";
+exports.TEST_DATABASE_URL = process.env.DATABASE_URL || "mongodb://localhost/test-post";
 exports.PORT = process.env.PORT || 8080;
