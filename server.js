@@ -15,9 +15,9 @@ app.use(bodyParser.json());
 app.get("/post" , (req,res)=>{
    Post.find()
    .limit(10)
-   .then(posts=>{
+   .then(post=>{
        res.json({
-          post: posts.map(post=>post.serialize())
+          post: post.map(post=>post.serialize())
        });
    })
    .catch(err =>{
@@ -28,7 +28,7 @@ app.get("/post" , (req,res)=>{
 
 app.get("/post/:id", (req,res) =>{
     Post.findById(req.params.id)
-    .then(post=> res.json(posts.serialize()))
+    .then(post=> res.json(post.serialize()))
     .catch(err =>{
         console.error(err);
         res.status(500).json({message:"Internal server error"});
