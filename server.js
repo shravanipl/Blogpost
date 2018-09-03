@@ -74,7 +74,7 @@ app.delete("/post/:id", (req,res) =>{
     .catch(err => res.status(500).json({message:"Internal server error"}));
 });
 
-app.use("*",function(){
+app.use("*",(req,res)=>{
     res.status(400).json({message:"Not found"});
 });
 
