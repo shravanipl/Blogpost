@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const mongoose = require('mongoose');
-
+const bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
 
@@ -10,10 +10,10 @@ const {Post} = require("./models");
 
 const app = express();
 let server;
-app.use(express.json);
+app.use(bodyParser.json());
 
 app.get("/posts" , (req,res)=>{
-   Posts.find()
+   Post.find()
    .limit(10)
    .then(posts=>{
        res.json({
@@ -27,7 +27,7 @@ app.get("/posts" , (req,res)=>{
 });
 
 app.get("/posts/:id", (req,res) =>{
-    Posts.findById(req.params.id)
+    Post.findById(req.params.id)
     .then(post=> res.json(posts.serialize()))
     .catch(err =>{
         console.error(err);
@@ -44,7 +44,7 @@ app.post("/posts", (req,res) =>{
             res.status(400).send(message);
         }
     }
-    Posts.create({
+    Post.create({
         title: req.body.title,
         author: req.body.author,
         content: req.body.content
@@ -63,13 +63,13 @@ app.put("/posts/:id", (req,res) =>{
         res.status(400).send(message);
     }
 
-    Posts.findByIdAndUpdate(req.params.id,{$set:toUpdate})
+    Post.findByIdAndUpdate(req.params.id,{$set:toUpdate})
     .then(post => res.status(204).end())
     .catch(err=> res.status(500).json({message:"Internal server error"}));
 });
 
 app.delete("/posts/:id", (req,res) =>{
-    Posts.findByIdAndDelete(req.params.id)
+    Post.findByIdAndDelete(req.params.id)
     .then(post => res.status(204).end())
     .catch(err => res.status(500).json({message:"Internal server error"}));
 });
