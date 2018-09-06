@@ -6,14 +6,14 @@ const commentSchema = new mongoose.Schema({
 });
 
 const authorSchema = new mongoose.Schema({
-        firstName:{type:String, required: true},
-        lastName : {type : String, required: true},
-        userName:{type:String, unique:true}
+        firstName:{type:'String', required: true},
+        lastName : {type : 'String', required: true},
+        userName:{type:'String', unique:true}
 });
 const postSchema = new mongoose.Schema({
-   title: {type: String, required:true },
+   title: {type: 'String', required:true },
    author:{type:mongoose.Schema.Types.ObjectId,ref:'Author'},
-   content:{type:String, required: true},
+   content:{type:'String', required: true},
    comments:[commentSchema]
 });
 
